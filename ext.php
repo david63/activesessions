@@ -17,8 +17,6 @@ use phpbb\extension\base;
 
 class ext extends base
 {
-	const ACTIVE_SESSIONS_VERSION = '2.1.1';
-
 	/**
 	* Enable extension if phpBB version requirement is met
 	*

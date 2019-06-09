@@ -2,14 +2,14 @@
 	"name": "david63/activesessions",
 	"type": "phpbb-extension",
 	"description": "Adds an Admin option to display the current active user sessions.",
+	"version": "2.1.1",
+	"time": "2019-05-11",
 	"keywords": [
 		"phpbb",
 		"extension",
 		"session",
 		"ACP"
 	],
-	"version": "2.1.1",
-	"time": "2019-05-11",
 	"license": "GPL-2.0-only",
 	"authors": [{
 		"name": "David Wood",
@@ -17,7 +17,6 @@
 	}],
 	"require": {
         "php": ">=5.4.0",
-		"phpbb/phpbb": ">=3.2.0",
         "composer/installers": "~1.0"
     },
 	"extra": {

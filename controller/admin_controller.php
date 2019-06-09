@@ -17,7 +17,8 @@ use phpbb\template\template;
 use phpbb\pagination;
 use phpbb\user;
 use phpbb\language\language;
-use david63\activesessions\ext;
+use david63\activesessions\core\functions;
+
 
 /**
 * Admin controller
@@ -51,26 +52,30 @@ class admin_controller implements admin_interface
 	/** @var string phpBB extension */
 	protected $php_ext;
 
+	/** @var \david63\activesessions\core\functions */
+	protected $creditspage;
+
 	/** @var string Custom form action */
 	protected $u_action;
 
     /**
      * Constructor for admin controller
      *
-     * @param \config|config                     $config   			Config object
-     * @param \driver_interface|driver_interface $db				Database object
-     * @param \request|request                   $request  			Request object
-     * @param \template|template                 $template			Template object
-     * @param \pagination|pagination             $pagination		Pagination object
-     * @param \user|user                         $user     			User object
-     * @param \language|language                 $language			Language object
-     * @param string							 $phpbb_root_path	phpBB root path
-     * @param string                             $php_ext			PHP extension
+     * @param \config\config                     		$config   			Config object
+     * @param \driver_interface\driver_interface 		$db					Database object
+     * @param \request\request                   		$request  			Request object
+     * @param \template\template                 		$template			Template object
+     * @param \pagination\pagination             		$pagination			Pagination object
+     * @param \user\user                         		$user     			User object
+     * @param \language\language                 		$language			Language object
+     * @param string							 		$phpbb_root_path	phpBB root path
+     * @param string                             		$php_ext			PHP extension
+     * @param \david63\activesessions\core\functions	functions			Functions for the extension
      *
 	 * @return \david63\activesessions\controller\admin_controller
      * @access   public
      */
-	public function __construct(config $config, driver_interface $db, request $request, template $template, pagination $pagination, user $user, language $language, $phpbb_root_path, $php_ext)
+	public function __construct(config $config, driver_interface $db, request $request, template $template, pagination $pagination, user $user, language $language, $phpbb_root_path, $php_ext, functions $functions)
 	{
 		$this->config			= $config;
 		$this->db  				= $db;
@@ -81,6 +86,7 @@ class admin_controller implements admin_interface
 		$this->language			= $language;
 		$this->phpbb_root_path	= $phpbb_root_path;
 		$this->php_ext			= $php_ext;
+		$this->functions		= $functions;
 	}
 
 	/**
@@ -92,7 +98,9 @@ class admin_controller implements admin_interface
 	public function display_output()
 	{
 		// Add the language file
-		$this->language->add_lang('acp_activesessions', 'david63/activesessions');
+		$this->language->add_lang('acp_activesessions', $this->functions->get_ext_namespace());
+
+		$back = false;
 
 		// Start initial var setup
 		$action			= $this->request->variable('action', '');
@@ -154,9 +162,13 @@ class admin_controller implements admin_interface
 			$this->template->assign_block_vars('active_sessions', array(
 				'ADMIN'				=> ($row['session_admin']) ? $this->language->lang('YES') : $this->language->lang('NO'),
 				'AUTO_LOGIN'		=> ($row['session_autologin']) ? $this->language->lang('YES') : $this->language->lang('NO'),
+
 				'BROWSER'			=> $row['session_browser'],
+
 				'FORUM'				=> ($row['forum_id'] > 0) ? $row['forum_name'] : '',
+
 				'LAST_VISIT'		=> $this->user->format_date($row['session_last_visit']),
+
 				'SESSION_FORWARD'	=> $row['session_forwarded_for'],
 				'SESSION_ID'		=> $row['session_id'],
 				'SESSION_IP'		=> $row['session_ip'],
@@ -165,7 +177,9 @@ class admin_controller implements admin_interface
 				'SESSION_PAGE'		=> $row['session_page'],
 				'SESSION_START'		=> $this->user->format_date($row['session_start']),
 				'SESSION_TIME'		=> $this->user->format_date($row['session_time']),
+
 				'USERNAME'			=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
+
 				'U_WHOIS'			=> append_sid("{$this->phpbb_root_path}adm/index.$this->php_ext", "i=acp_users&amp;action=whois&amp;user_ip={$row['session_ip']}"),
 		   	));
 		}
@@ -225,15 +239,22 @@ class admin_controller implements admin_interface
 			'HEAD_TITLE'		=> $this->language->lang('ACTIVE_SESSIONS'),
 			'HEAD_DESCRIPTION'	=> $this->language->lang('ACTIVE_SESSIONS_EXPLAIN'),
 
-			'VERSION_NUMBER'	=> ext::ACTIVE_SESSIONS_VERSION,
+			'NAMESPACE'			=> $this->functions->get_ext_namespace('twig'),
+
+			'S_BACK'			=> $back,
+			'S_VERSION_CHECK'	=> $this->functions->version_check(),
+
+			'VERSION_NUMBER'	=> $this->functions->get_this_version(),
 		));
 
 		$this->template->assign_vars(array(
-			'S_FILTER_CHAR'				=> $this->character_select($fc),
-			'S_SORT_DIR'				=> $s_sort_dir,
-			'S_SORT_KEY'				=> $s_sort_key,
-			'TOTAL_USERS'				=> $this->language->lang('TOTAL_SESSIONS', (int) $session_count),
-			'U_ACTION'					=> $action,
+			'S_FILTER_CHAR'	=> $this->character_select($fc),
+			'S_SORT_DIR'	=> $s_sort_dir,
+			'S_SORT_KEY'	=> $s_sort_key,
+
+			'TOTAL_USERS'	=> $this->language->lang('TOTAL_SESSIONS', (int) $session_count),
+
+			'U_ACTION'		=> $action,
 
 		));
 	}

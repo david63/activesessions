@@ -11,3 +11,9 @@ services:
             - '@language'
             - '%core.root_path%'
             - '%core.php_ext%'
+            - '@david63.activesessions.core.functions'
+
+    david63.activesessions.core.functions:
+        class: david63\activesessions\core\functions
+        arguments:
+            - '@ext.manager'

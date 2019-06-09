@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'ACTIVE_SESSIONS_EXPLAIN'	=> 'Here is a list of the current active sessions on the board.<br /><br />Click on “Session IP” to expand IP details.<br />Click on “Session ID” to expand session details.',
+	'ACTIVE_SESSIONS_EXPLAIN'	=> 'Here is a list of the current active sessions on the board.<br><br>Click on “Session IP” to expand IP details.<br>Click on “Session ID” to expand session details.',
 	'ADMIN_USER'				=> 'Admin user',
 	'ALL'						=> 'All',
 	'AUTO_LOGIN'				=> 'Auto login set',
@@ -51,6 +51,8 @@ $lang = array_merge($lang, array(
 
 	'LAST_VISIT'				=> 'User’s last visit',
 
+	'NEW_VERSION'				=> 'New Version',
+	'NEW_VERSION_EXPLAIN'		=> 'There is a newer version of this extension available.',
 	'NO_SESSION_DATA'			=> 'There is no session data available for this request.',
 
 	'OTHER'						=> 'Other',
