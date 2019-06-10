@@ -8,9 +8,6 @@ Adds an Admin option to display the current active user sessions.
 [![Latest Unstable Version](https://poser.pugx.org/david63/activesessions/v/unstable)](https://packagist.org/packages/david63/activesessions)
 [![Total Downloads](https://poser.pugx.org/david63/activesessions/downloads)](https://packagist.org/packages/david63/activesessions)
 
-![Screenshot](credit_page_user.jpg)
-![Screenshot](credits_page_admin.jpg)
-
 ## Minimum Requirements
 * phpBB 3.2.0
 * PHP 5.4
