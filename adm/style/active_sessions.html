@@ -36,11 +36,8 @@
 			{% for sessions in active_sessions %}
 				{% if sessions.S_ROW_COUNT is even %}<div class="table-row1">{% else %}<div class="table-row2">{% endif %}
 					<div class="table-body-cell">{{ sessions.USERNAME }}</div>
-
 					<div class="table-body-cell"><a href="{{ sessions.U_WHOIS }}" class="whois">{{ sessions.SESSION_IP }}</a></div>
-
 					<div class="table-body-cell pointer showkey" key="{{ sessions.SESSION_KEY }}">{{ sessions.SESSION_ID }}</div>
-
 					<div class="table-body-cell">{{ sessions.SESSION_START }}</div>
 				</div>
 

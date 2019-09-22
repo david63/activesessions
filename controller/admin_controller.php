@@ -19,7 +19,6 @@ use phpbb\user;
 use phpbb\language\language;
 use david63\activesessions\core\functions;
 
-
 /**
 * Admin controller
 */
