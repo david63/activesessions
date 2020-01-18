@@ -52,7 +52,10 @@ class admin_controller implements admin_interface
 	protected $php_ext;
 
 	/** @var \david63\activesessions\core\functions */
-	protected $creditspage;
+	protected $functions;
+
+	/** @var string phpBB tables */
+	protected $tables;
 
 	/** @var string Custom form action */
 	protected $u_action;
@@ -70,11 +73,12 @@ class admin_controller implements admin_interface
      * @param string							 		$phpbb_root_path	phpBB root path
      * @param string                             		$php_ext			PHP extension
      * @param \david63\activesessions\core\functions	functions			Functions for the extension
+     * @param array	                            		$tables				phpBB db tables
      *
 	 * @return \david63\activesessions\controller\admin_controller
      * @access   public
      */
-	public function __construct(config $config, driver_interface $db, request $request, template $template, pagination $pagination, user $user, language $language, $phpbb_root_path, $php_ext, functions $functions)
+	public function __construct(config $config, driver_interface $db, request $request, template $template, pagination $pagination, user $user, language $language, $phpbb_root_path, $php_ext, functions $functions, $tables)
 	{
 		$this->config			= $config;
 		$this->db  				= $db;
@@ -86,6 +90,7 @@ class admin_controller implements admin_interface
 		$this->phpbb_root_path	= $phpbb_root_path;
 		$this->php_ext			= $php_ext;
 		$this->functions		= $functions;
+		$this->tables			= $tables;
 	}
 
 	/**
@@ -96,8 +101,9 @@ class admin_controller implements admin_interface
 	*/
 	public function display_output()
 	{
-		// Add the language file
+		// Add the language files
 		$this->language->add_lang('acp_activesessions', $this->functions->get_ext_namespace());
+		$this->language->add_lang('acp_common', $this->functions->get_ext_namespace());
 
 		$back = false;
 
@@ -140,12 +146,12 @@ class admin_controller implements admin_interface
 	   	$sql = $this->db->sql_build_query('SELECT', array(
 			'SELECT'	=> 'u.user_id, u.username, u.username_clean, u.user_colour, u.user_ip, s.*, f.forum_id, f.forum_name',
 			'FROM'		=> array(
-				USERS_TABLE		=> 'u',
-				SESSIONS_TABLE	=> 's',
+				$this->tables['users']		=> 'u',
+				$this->tables['sessions']	=> 's',
 			),
 			'LEFT_JOIN'	=> array(
 					array(
-						'FROM'	=> array(FORUMS_TABLE => 'f'),
+						'FROM'	=> array($this->tables['forums'] => 'f'),
 						'ON'	=> 's.session_forum_id = f.forum_id',
 					),
 				),
@@ -194,8 +200,8 @@ class admin_controller implements admin_interface
 		$sql = $this->db->sql_build_query('SELECT', array(
 			'SELECT'	=> 'COUNT(s.session_id) AS total_sessions',
 			'FROM'		=> array(
-				USERS_TABLE		=> 'u',
-				SESSIONS_TABLE	=> 's',
+				$this->tables['users']		=> 'u',
+				$this->tables['sessions']	=> 's',
 			),
 			'WHERE'		=> 'u.user_id = s.session_user_id
 				AND s.session_time >= ' . (time() - ($this->config['session_length'] * 60)) . $filter_by,
@@ -234,16 +240,20 @@ class admin_controller implements admin_interface
 		}
 
 		// Template vars for header panel
+		$version_data	= $this->functions->version_check();
+
 		$this->template->assign_vars(array(
+			'DOWNLOAD'			=> (array_key_exists('download', $version_data)) ? '<a href =' . $version_data['download'] . '>' . $this->language->lang('NEW_VERSION_LINK') . '</a>' : '',
+
 			'HEAD_TITLE'		=> $this->language->lang('ACTIVE_SESSIONS'),
 			'HEAD_DESCRIPTION'	=> $this->language->lang('ACTIVE_SESSIONS_EXPLAIN'),
 
 			'NAMESPACE'			=> $this->functions->get_ext_namespace('twig'),
 
 			'S_BACK'			=> $back,
-			'S_VERSION_CHECK'	=> $this->functions->version_check(),
+			'S_VERSION_CHECK'	=> (array_key_exists('current', $version_data)) ? $version_data['current'] : false,
 
-			'VERSION_NUMBER'	=> $this->functions->get_this_version(),
+			'VERSION_NUMBER'	=> $this->functions->get_meta('version'),
 		));
 
 		$this->template->assign_vars(array(

@@ -12,6 +12,7 @@ services:
             - '%core.root_path%'
             - '%core.php_ext%'
             - '@david63.activesessions.core.functions'
+            - '%tables%'			
 
     david63.activesessions.core.functions:
         class: david63\activesessions\core\functions
