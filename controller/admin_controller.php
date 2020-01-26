@@ -9,7 +9,6 @@
 
 namespace david63\activesessions\controller;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use phpbb\config\config;
 use phpbb\db\driver\driver_interface;
 use phpbb\request\request;
