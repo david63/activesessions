@@ -13,11 +13,11 @@ class activesessions_module
 {
 	public $u_action;
 
-    /**
-     * @internal param $id
-     * @internal param $mode
-     */
-    function main($id, $mode)
+	/**
+	* @internal param $id
+	* @internal param $mode
+	*/
+	function main($id, $mode)
 	{
 		global $phpbb_container;
 

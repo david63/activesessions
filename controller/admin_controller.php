@@ -60,24 +60,24 @@ class admin_controller implements admin_interface
 	/** @var string Custom form action */
 	protected $u_action;
 
-    /**
-     * Constructor for admin controller
-     *
-     * @param \config\config                     		$config   			Config object
-     * @param \driver_interface\driver_interface 		$db					Database object
-     * @param \request\request                   		$request  			Request object
-     * @param \template\template                 		$template			Template object
-     * @param \pagination\pagination             		$pagination			Pagination object
-     * @param \user\user                         		$user     			User object
-     * @param \language\language                 		$language			Language object
-     * @param string							 		$phpbb_root_path	phpBB root path
-     * @param string                             		$php_ext			PHP extension
-     * @param \david63\activesessions\core\functions	functions			Functions for the extension
-     * @param array	                            		$tables				phpBB db tables
-     *
-	 * @return \david63\activesessions\controller\admin_controller
-     * @access   public
-     */
+	/**
+	* Constructor for admin controller
+	*
+	* @param \config\config                     		$config   			Config object
+	* @param \driver_interface\driver_interface 		$db					Database object
+	* @param \request\request                   		$request  			Request object
+	* @param \template\template                 		$template			Template object
+	* @param \pagination\pagination             		$pagination			Pagination object
+	* @param \user\user                         		$user     			User object
+	* @param \language\language                 		$language			Language object
+	* @param string							 		$phpbb_root_path	phpBB root path
+	* @param string                             		$php_ext			PHP extension
+	* @param \david63\activesessions\core\functions	functions			Functions for the extension
+	* @param array	                            		$tables				phpBB db tables
+	*
+	* @return \david63\activesessions\controller\admin_controller
+	* @access   public
+	*/
 	public function __construct(config $config, driver_interface $db, request $request, template $template, pagination $pagination, user $user, language $language, $phpbb_root_path, $php_ext, functions $functions, $tables)
 	{
 		$this->config			= $config;
@@ -143,7 +143,7 @@ class admin_controller implements admin_interface
 			$filter_by .= ' AND u.username_clean ' . $this->db->sql_like_expression(utf8_clean_string(substr($fc, 0, 1)) . $this->db->get_any_char());
 		}
 
-	   	$sql = $this->db->sql_build_query('SELECT', array(
+		$sql = $this->db->sql_build_query('SELECT', array(
 			'SELECT'	=> 'u.user_id, u.username, u.username_clean, u.user_colour, u.user_ip, s.*, f.forum_id, f.forum_name',
 			'FROM'		=> array(
 				$this->tables['users']		=> 'u',
@@ -186,7 +186,7 @@ class admin_controller implements admin_interface
 				'USERNAME'			=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 
 				'U_WHOIS'			=> append_sid("{$this->phpbb_root_path}adm/index.$this->php_ext", "i=acp_users&amp;action=whois&amp;user_ip={$row['session_ip']}"),
-		   	));
+			));
 		}
 		$this->db->sql_freeresult($result);
 

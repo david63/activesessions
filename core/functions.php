@@ -68,7 +68,7 @@ class functions
 	*/
 	public function version_check()
 	{
-	   if ($this->get_meta('host') == 'www.phpbb.com')
+		if ($this->get_meta('host') == 'www.phpbb.com')
 		{
 			$port 	= 'https://';
 			$stable	= null;
@@ -113,7 +113,7 @@ class functions
 
 		foreach (new \RecursiveIteratorIterator(new \RecursiveArrayIterator($md_manager->get_metadata('all'))) as $key => $value)
 		{
-	    	if ($data === $key)
+			if ($data === $key)
 			{
 				$meta_data = $value;
 			}
