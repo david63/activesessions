@@ -2,11 +2,16 @@
 
 Adds an Admin option to display the current active user sessions.
 
-[![Build Status](https://travis-ci.com/david63/activesessions.svg?branch=master)](https://travis-ci.com/david63/activesessions)
+[![Build Status](https://github.com/david63/activesessions/workflows/Tests/badge.svg)](https://github.com/phpbb-extensions/david63/activesessions)
 [![License](https://poser.pugx.org/david63/activesessions/license)](https://packagist.org/packages/david63/activesessions)
 [![Latest Stable Version](https://poser.pugx.org/david63/activesessions/v/stable)](https://packagist.org/packages/david63/activesessions)
 [![Latest Unstable Version](https://poser.pugx.org/david63/activesessions/v/unstable)](https://packagist.org/packages/david63/activesessions)
 [![Total Downloads](https://poser.pugx.org/david63/activesessions/downloads)](https://packagist.org/packages/david63/activesessions)
+[![codecov](https://codecov.io/gh/david63/activesessions/branch/master/graph/badge.svg?token=D2500PgRex)](https://codecov.io/gh/david63/activesessions)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/59902be2665c476dbd7951858c9ff769)](https://www.codacy.com/manual/david63/activesessions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=david63/activesessions&amp;utm_campaign=Badge_Grade)
+
+ [![Compatible](https://img.shields.io/badge/compatible-phpBB:3.2.x-blue.svg)](https://shields.io/)
+ [![Compatible](https://img.shields.io/badge/compatible-phpBB:3.3.x-blue.svg)](https://shields.io/)
 
 ## Minimum Requirements
 * phpBB 3.2.0
