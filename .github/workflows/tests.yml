@@ -10,10 +10,10 @@ env:
 
 on:
     push:
-        branches:        # Run tests when commits are pushed to these branches in your repo
+        branches:       # Run tests when commits are pushed to these branches in your repo
             - master
             - develop
-    pull_request:        # Run tests when pull requests are made on these branches in your repo
+    pull_request:       # Run tests when pull requests are made on these branches in your repo
         branches:
             - master
             - develop
