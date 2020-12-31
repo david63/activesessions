@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @package Move Disapproved Posts
+ * @package Active Sessions Extension
  * @copyright (c) 2020 david63
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
