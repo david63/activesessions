@@ -10,12 +10,11 @@ Adds an Admin option to display the current active user sessions.
 [![codecov](https://codecov.io/gh/david63/activesessions/branch/master/graph/badge.svg?token=D2500PgRex)](https://codecov.io/gh/david63/activesessions)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/59902be2665c476dbd7951858c9ff769)](https://www.codacy.com/manual/david63/activesessions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=david63/activesessions&amp;utm_campaign=Badge_Grade)
 
- [![Compatible](https://img.shields.io/badge/compatible-phpBB:3.2.x-blue.svg)](https://shields.io/)
  [![Compatible](https://img.shields.io/badge/compatible-phpBB:3.3.x-blue.svg)](https://shields.io/)
 
 ## Minimum Requirements
-* phpBB 3.2.0
-* PHP 5.4
+* phpBB 3.3.0
+* PHP 7.1.3
 
 ## Install
 1. [Download the latest release](https://github.com/david63/activesessions/archive/3.2.zip) and unzip it.
