@@ -23,25 +23,25 @@ use david63\activesessions\core\functions;
  */
 class admin_controller
 {
-	/** @var \config */
+	/** @var config */
 	protected $config;
 
-	/** @var \driver_interface */
+	/** @var driver_interface */
 	protected $db;
 
-	/** @var \request */
+	/** @var request */
 	protected $request;
 
-	/** @var \template */
+	/** @var template */
 	protected $template;
 
-	/** @var \pagination */
+	/** @var pagination */
 	protected $pagination;
 
-	/** @var \user */
+	/** @var user */
 	protected $user;
 
-	/** @var \language */
+	/** @var language */
 	protected $language;
 
 	/** @var string phpBB root path */
@@ -50,10 +50,10 @@ class admin_controller
 	/** @var string phpBB extension */
 	protected $php_ext;
 
-	/** @var \david63\activesessions\core\functions */
+	/** @var functions */
 	protected $functions;
 
-	/** @var string phpBB tables */
+	/** @var array phpBB tables */
 	protected $tables;
 
 	/** @var string */
@@ -65,18 +65,18 @@ class admin_controller
 	/**
 	 * Constructor for admin controller
 	 *
-	 * @param \config\config                             $config             Config object
-	 * @param \driver_interface\driver_interface         $db                 Database object
-	 * @param \request\request                           $request            Request object
-	 * @param \template\template                         $template           Template object
-	 * @param \pagination\pagination                     $pagination         Pagination object
-	 * @param \user\user                                 $user               User object
-	 * @param \language\language                         $language           Language object
-	 * @param string                                     $root_path          phpBB root path
-	 * @param string                                     $php_ext            PHP extension
-	 * @param \david63\activesessions\core\functions     $functions          Functions for the extension
-	 * @param array                                      $tables             phpBB db tables
-	 * @param string                                     $ext_images_path    Path to this extension's images
+	 * @param config			$config             Config object
+	 * @param driver_interface	$db                 Database object
+	 * @param request			$request            Request object
+	 * @param template			$template           Template object
+	 * @param pagination		$pagination         Pagination object
+	 * @param user				$user               User object
+	 * @param language			$language           Language object
+	 * @param string			$root_path          phpBB root path
+	 * @param string			$php_ext            PHP extension
+	 * @param functions     	$functions          Functions for the extension
+	 * @param array				$tables             phpBB db tables
+	 * @param string			$ext_images_path    Path to this extension's images
 	 *
 	 * @return \david63\activesessions\controller\admin_controller
 	 * @access public
